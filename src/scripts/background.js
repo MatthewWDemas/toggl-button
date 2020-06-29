@@ -1842,12 +1842,10 @@ const TogglButton = {
     }
   },
 
-  // Triggered when user clicks a notification (but not on a button in the notification)
-  // N.B. Buttons do not exist in Firefox, so we trigger notificationBtnClick from here in Firefox.
+  // Triggered when user clicks the body of a notification
+  // We assume this maps to the first button's action (note browsers such as Firefox do not support buttons at all)
   onNotificationClicked: function (notificationId) {
-    if (FF) {
-      TogglButton.notificationBtnClick(notificationId, 0);
-    }
+    TogglButton.notificationBtnClick(notificationId, 0);
     if (notificationId === 'remind-to-track-time') {
       TogglButton.setNannyTimer();
     } else {
